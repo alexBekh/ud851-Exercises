@@ -18,10 +18,10 @@ package com.example.android.implicitintents;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -83,10 +83,7 @@ public class MainActivity extends AppCompatActivity {
      * @param v Button that was clicked.
      */
     public void createYourOwn(View v) {
-        Toast.makeText(this,
-                "TODO: Create Your Own Implicit Intent",
-                Toast.LENGTH_SHORT)
-                .show();
+        capturePhoto();
     }
 
     /**
@@ -161,5 +158,14 @@ public class MainActivity extends AppCompatActivity {
                 .setChooserTitle(dialogTitle)
                 .setText(text)
                 .startChooser();
+    }
+    
+    void capturePhoto()
+    {
+        Intent intent = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA);
+        if (intent.resolveActivity(getPackageManager()) != null)
+        {
+            startActivity(intent);
+        }
     }
 }
