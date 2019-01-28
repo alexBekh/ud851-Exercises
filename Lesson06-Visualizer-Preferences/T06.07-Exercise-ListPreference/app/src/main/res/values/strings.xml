@@ -31,10 +31,17 @@
 
     <!-- Value in SharedPreferences for red color option -->
     <string name="pref_color_red_value" translatable="false">red</string>
+    <string name="pref_color_red_label" >Red</string>
 
     <!-- Value in SharedPreferences for blue color option -->
     <string name="pref_color_blue_value" translatable="false">blue</string>
+    <string name="pref_color_blue_label" >Blue</string>
 
     <!-- Value in SharedPreferences for green color option -->
     <string name="pref_color_green_value" translatable="false">green</string>
+    <string name="pref_color_green_label" >Green</string>
+
+    <string name="pref_color_key" translatable="false">shape_color</string>
+    <string name="pref_color_label">Shapes color</string>
+    <string name="pref_color_default_value" translatable="false">@string/pref_color_green_value</string>
 </resources>

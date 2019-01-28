@@ -24,8 +24,6 @@ import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
-import android.support.v7.preference.PreferenceScreen;
-import android.widget.Toast;
 
 
 public class SettingsFragment extends PreferenceFragmentCompat implements
@@ -36,20 +34,10 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
 
         // Add visualizer preferences, defined in the XML file in res->xml->pref_visualizer
         addPreferencesFromResource(R.xml.pref_visualizer);
-
-        SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
-        PreferenceScreen prefScreen = getPreferenceScreen();
-        int count = prefScreen.getPreferenceCount();
-
+    
         // Go through all of the preferences, and set up their preference summary.
-        for (int i = 0; i < count; i++) {
-            Preference p = prefScreen.getPreference(i);
-            // You don't need to set up preference summaries for checkbox preferences because
-            // they are already set up in xml using summaryOff and summary On
-            if (!(p instanceof CheckBoxPreference)) {
-                String value = sharedPreferences.getString(p.getKey(), "");
-                setPreferenceSummary(p, value);
-            }
+        for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
+            setPreferenceSummary(getPreferenceScreen().getPreference(i));
         }
     }
 
@@ -57,12 +45,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         // Figure out which preference was changed
         Preference preference = findPreference(key);
-        if (null != preference) {
-            // Updates the summary for the preference
-            if (!(preference instanceof CheckBoxPreference)) {
-                String value = sharedPreferences.getString(preference.getKey(), "");
-                setPreferenceSummary(preference, value);
-            }
+        if (null != preference)
+        {
+            setPreferenceSummary(preference);
         }
     }
 
@@ -70,18 +55,25 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
      * Updates the summary for the preference
      *
      * @param preference The preference to be updated
-     * @param value      The value that the preference was updated to
      */
-    private void setPreferenceSummary(Preference preference, String value) {
+    private void setPreferenceSummary(Preference preference) {
         // TODO (3) Don't forget to add code here to properly set the summary for an EditTextPreference
-        if (preference instanceof ListPreference) {
+        if (preference instanceof CheckBoxPreference)
+        {
+            // You don't need to set up preference summaries for checkbox preferences because
+            // they are already set up in xml using summaryOff and summary On
+            return;
+        }
+        else if (preference instanceof ListPreference)
+        {
             // For list preferences, figure out the label of the selected value
             ListPreference listPreference = (ListPreference) preference;
-            int prefIndex = listPreference.findIndexOfValue(value);
-            if (prefIndex >= 0) {
-                // Set the summary to that label
-                listPreference.setSummary(listPreference.getEntries()[prefIndex]);
-            }
+            listPreference.setSummary(listPreference.getEntry());
+        }
+        else if (preference instanceof EditTextPreference)
+        {
+            EditTextPreference editTextPreference = (EditTextPreference) preference;
+            editTextPreference.setSummary(editTextPreference.getText());
         }
     }
     

@@ -58,5 +58,6 @@
 
     <!-- Value in SharedPreferences for green color option -->
     <string name="pref_color_green_value" translatable="false">green</string>
+    <string name="warning_size_correct_value">Size must be a number bigger than 0 and smaller than 3</string>
 
 </resources>
