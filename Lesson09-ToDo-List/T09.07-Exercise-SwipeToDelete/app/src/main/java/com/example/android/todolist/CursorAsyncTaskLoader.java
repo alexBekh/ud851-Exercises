@@ -24,12 +24,14 @@ class CursorAsyncTaskLoader extends AsyncTaskLoader<Cursor>
     @Override
     protected void onStartLoading()
     {
+        mDataReloaded = false;
+        
         if (mTaskData != null)
         {
             Log.d(TAG, "onStartLoading: using cached data");
             // Delivers any previously loaded data immediately
             deliverResult(mTaskData);
-            mDataReloaded = false;
+            
         }
         else
         {

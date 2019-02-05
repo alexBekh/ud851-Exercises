@@ -4,14 +4,15 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.util.Log;
 
 public class TaskContentObserver extends ContentObserver
 {
+    private static final String TAG = TaskContentObserver.class.getSimpleName();
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //  Singleton
     ////////////////////////////////////////////////////////////////////////////////////////////////
     private static TaskContentObserver taskContentObserver;
-    
     public static TaskContentObserver getInstance()
     {
         if (taskContentObserver == null)
@@ -24,25 +25,7 @@ public class TaskContentObserver extends ContentObserver
     }
     
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    //  Listener
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    public interface OnChangeListener
-    {
-        void onChange();
-    }
-    private OnChangeListener mChangeListener;
-    
-    public void registerListener(OnChangeListener listener)
-    {
-        mChangeListener = listener;
-    }
-    
-    public void unregisterListener(OnChangeListener listener)
-    {
-        mChangeListener = null;
-    }
-    
-    ////////////////////////////////////////////////////////////////////////////////////////////////
+    private boolean mDataChanged = false;
     private final HandlerThread mHandlerThread;
     
     private TaskContentObserver(HandlerThread thread)
@@ -54,8 +37,8 @@ public class TaskContentObserver extends ContentObserver
     @Override
     public void onChange(boolean selfChange, Uri uri)
     {
-        if(mChangeListener != null)
-            mChangeListener.onChange();
+        Log.d(TAG, "onChange: ");
+        mDataChanged = true;
     }
     
     @Override
@@ -68,5 +51,23 @@ public class TaskContentObserver extends ContentObserver
     public boolean deliverSelfNotifications()
     {
         return true;
+    }
+    
+    public boolean isDataChanged()
+    {
+        return mDataChanged;
+    }
+    
+    public void resetNotification()
+    {
+        Log.d(TAG, "resetNotification: ");
+        mDataChanged = false;
+    }
+    
+    public boolean checkAndReset()
+    {
+        boolean res = mDataChanged;
+        mDataChanged = false;
+        return res;
     }
 }
