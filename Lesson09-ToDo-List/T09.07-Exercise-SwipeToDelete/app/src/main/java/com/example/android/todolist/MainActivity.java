@@ -27,6 +27,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
 
 import com.example.android.todolist.data.TaskContract;
@@ -35,7 +36,6 @@ import com.example.android.todolist.data.TaskContract;
 public class MainActivity extends AppCompatActivity
         implements
         LoaderManager.LoaderCallbacks<Cursor>
-        , TaskContentObserver.OnChangeListener
 {
     
     
@@ -44,9 +44,8 @@ public class MainActivity extends AppCompatActivity
     private static final int TASK_LOADER_ID = 0;
     
     // Member variables for the adapter and RecyclerView
-    private CustomCursorAdapter mAdapter;
+    private TaskCursorAdapter mAdapter;
     RecyclerView mRecyclerView;
-    private boolean mContentChanged = false;
     
     
     @Override
@@ -56,14 +55,14 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         
         // Set the RecyclerView to its corresponding view
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewTasks);
+        mRecyclerView = findViewById(R.id.recyclerViewTasks);
         
         // Set the layout for the RecyclerView to be a linear layout, which measures and
         // positions items within a RecyclerView into a linear list
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         
         // Initialize the adapter and attach it to the RecyclerView
-        mAdapter = new CustomCursorAdapter(this);
+        mAdapter = new TaskCursorAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
 
         /*
@@ -93,6 +92,7 @@ public class MainActivity extends AppCompatActivity
                 getContentResolver().delete(uri, null, null);
                 // TODO (3) Restart the loader to re-query for all tasks after a deletion
                 getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, MainActivity.this);
+                TaskContentObserver.getInstance().resetNotification();
             }
         }).attachToRecyclerView(mRecyclerView);
 
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity
          Attach an OnClickListener to it, so that when it's clicked, a new intent will be created
          to launch the AddTaskActivity.
          */
-        FloatingActionButton fabButton = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fabButton = findViewById(R.id.fab);
         
         fabButton.setOnClickListener(new View.OnClickListener()
         {
@@ -120,7 +120,6 @@ public class MainActivity extends AppCompatActivity
          */
         getSupportLoaderManager().initLoader(TASK_LOADER_ID, null, this);
         
-        TaskContentObserver.getInstance().registerListener(this);
         getContentResolver().registerContentObserver(TaskContract.TaskEntry.CONTENT_URI,
                 true, TaskContentObserver.getInstance());
     }
@@ -130,7 +129,6 @@ public class MainActivity extends AppCompatActivity
     {
         super.onDestroy();
         getContentResolver().unregisterContentObserver(TaskContentObserver.getInstance());
-        TaskContentObserver.getInstance().unregisterListener(this);
     }
     
     /**
@@ -143,8 +141,11 @@ public class MainActivity extends AppCompatActivity
     {
         super.onResume();
         // re-queries for all tasks
-        if (mContentChanged)
+        if (TaskContentObserver.getInstance().isDataChanged())
+        {
             getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, this);
+            TaskContentObserver.getInstance().resetNotification();
+        }
     }
     
     /**
@@ -172,13 +173,13 @@ public class MainActivity extends AppCompatActivity
         // Update the data that the adapter uses to create ViewHolders
         mAdapter.swapCursor(data);
     
-        if (loader instanceof CursorAsyncTaskLoader)
-        {
-            CursorAsyncTaskLoader cursorLoader = (CursorAsyncTaskLoader) loader;
-            
-            if(cursorLoader.isDataReloaded())
-                mContentChanged = false;
-        }
+//        if (loader instanceof CursorAsyncTaskLoader)
+//        {
+//            CursorAsyncTaskLoader cursorLoader = (CursorAsyncTaskLoader) loader;
+//
+//            if(cursorLoader.isDataReloaded())
+//                TaskContentObserver.getInstance().resetNotification();
+//        }
     }
     
     
@@ -193,13 +194,7 @@ public class MainActivity extends AppCompatActivity
     public void onLoaderReset(Loader<Cursor> loader)
     {
         mAdapter.swapCursor(null);
+        Log.d(TAG, "onLoaderReset: ");
     }
-    
-    @Override
-    public void onChange()
-    {
-        mContentChanged = true;
-    }
-    
 }
 

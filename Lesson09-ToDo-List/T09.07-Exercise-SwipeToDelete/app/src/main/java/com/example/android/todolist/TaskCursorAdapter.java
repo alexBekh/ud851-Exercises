@@ -30,10 +30,10 @@ import com.example.android.todolist.data.TaskContract;
 
 
 /**
- * This CustomCursorAdapter creates and binds ViewHolders, that hold the description and priority of a task,
+ * This TaskCursorAdapter creates and binds ViewHolders, that hold the description and priority of a task,
  * to a RecyclerView to efficiently display data.
  */
-public class CustomCursorAdapter extends RecyclerView.Adapter<CustomCursorAdapter.TaskViewHolder> {
+public class TaskCursorAdapter extends RecyclerView.Adapter<TaskCursorAdapter.TaskViewHolder> {
 
     // Class variables for the Cursor that holds task data and the Context
     private Cursor mCursor;
@@ -41,11 +41,11 @@ public class CustomCursorAdapter extends RecyclerView.Adapter<CustomCursorAdapte
 
 
     /**
-     * Constructor for the CustomCursorAdapter that initializes the Context.
+     * Constructor for the TaskCursorAdapter that initializes the Context.
      *
      * @param mContext the current Context
      */
-    public CustomCursorAdapter(Context mContext) {
+    public TaskCursorAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
