@@ -43,13 +43,14 @@
             android:id="@+id/textViewPassangerLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
+            android:letterSpacing="0.5"
             android:text="@string/passenger_label"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintTop_creator="1"/>
 
         <TextView
             android:id="@+id/textViewPassangerName"
@@ -57,7 +58,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="@color/colorPrimary"
-            app:layout_constraintStart_toStartOf="@+id/textViewPassangerLabel"
+            app:layout_constraintStart_toStartOf="@+id/leftGuideline"
             app:layout_constraintTop_toBottomOf="@+id/textViewPassangerLabel"
             tools:text="@string/passenger_name"/>
 
@@ -65,23 +66,21 @@
             android:id="@+id/left_rect"
             android:layout_width="60dp"
             android:layout_height="80dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/shape_rectangle_stroke"
+            app:layout_constraintStart_toStartOf="@+id/leftGuideline"
             app:layout_constraintTop_toBottomOf="@+id/textViewPassangerName"
-            app:srcCompat="@drawable/shape_rectangle_stroke"
             tools:ignore="ContentDescription"/>
 
         <ImageView
             android:id="@+id/right_rect"
             android:layout_width="60dp"
             android:layout_height="80dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/shape_rectangle_stroke"
+            app:layout_constraintEnd_toStartOf="@+id/rightGuidline"
             app:layout_constraintTop_toTopOf="@+id/left_rect"
-            app:srcCompat="@drawable/shape_rectangle_stroke"
             tools:ignore="ContentDescription"/>
 
         <ImageView
@@ -121,7 +120,11 @@
             android:id="@+id/textViewFlightCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="@color/colorPrimary"
             app:layout_constraintEnd_toStartOf="@+id/right_rect"
@@ -132,25 +135,13 @@
         <TextView
             android:id="@+id/textViewBoardingTimeLabel"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_height="0dp"
             android:layout_marginTop="32dp"
+            android:letterSpacing="0.3"
             android:text="@string/boarding_time_label"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/leftGuideline"
             app:layout_constraintTop_toBottomOf="@+id/left_rect"/>
-
-        <TextView
-            android:id="@+id/textViewBoardingInLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="40dp"
-            android:layout_marginRight="40dp"
-            android:text="@string/boarding_in_label"
-            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textViewBoardingTimeLabel"/>
 
         <TextView
             android:id="@+id/textViewBoardingTime"
@@ -158,40 +149,20 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="@android:color/black"
-            app:layout_constraintStart_toStartOf="@+id/textViewBoardingTimeLabel"
+            app:layout_constraintStart_toStartOf="@+id/leftGuideline"
             app:layout_constraintTop_toBottomOf="@+id/textViewBoardingTimeLabel"
             tools:text="@string/boarding_time"/>
-
-        <TextView
-            android:id="@+id/textViewBoardingIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="@android:color/holo_red_dark"
-            app:layout_constraintStart_toStartOf="@+id/textViewBoardingInLabel"
-            app:layout_constraintTop_toTopOf="@+id/textViewBoardingTime"
-            tools:text="@string/boarding_in_time"/>
 
         <TextView
             android:id="@+id/textViewDepartureLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
+            android:letterSpacing="0.3"
             android:text="@string/departure_time_label"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/leftGuideline"
             app:layout_constraintTop_toBottomOf="@+id/textViewBoardingTime"/>
-
-        <TextView
-            android:id="@+id/textViewArrivalLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/arrival_time_label"
-            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            app:layout_constraintStart_toStartOf="@+id/textViewBoardingIn"
-            app:layout_constraintTop_toTopOf="@+id/textViewDepartureLabel"/>
 
         <TextView
             android:id="@+id/textViewDepartureTime"
@@ -199,34 +170,67 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:textColor="@color/colorGood"
-            app:layout_constraintStart_toStartOf="@+id/textViewDepartureLabel"
+            app:layout_constraintStart_toStartOf="@+id/leftGuideline"
             app:layout_constraintTop_toBottomOf="@+id/textViewDepartureLabel"
             tools:text="@string/departure_time"/>
 
         <TextView
-            android:id="@+id/textViewArrivalTime"
+            android:id="@+id/textViewBoardingInLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0.3"
+            android:text="@string/boarding_in_label"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            app:layout_constraintEnd_toStartOf="@+id/rightGuidline"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/rightRowGuide"
+            app:layout_constraintTop_toTopOf="@+id/textViewBoardingTimeLabel"/>
+
+        <TextView
+            android:id="@+id/boardingInTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@android:color/holo_red_dark"
+            app:layout_constraintEnd_toStartOf="@+id/rightGuidline"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/rightRowGuide"
+            app:layout_constraintTop_toBottomOf="@+id/textViewBoardingInLabel"
+            tools:text="@string/boarding_in_time"/>
+
+        <TextView
+            android:id="@+id/textViewArrivalLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:letterSpacing="0.3"
+            android:text="@string/arrival_time_label"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            app:layout_constraintEnd_toStartOf="@+id/rightGuidline"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/rightRowGuide"
+            app:layout_constraintTop_toBottomOf="@+id/boardingInTime"/>
+
+        <TextView
+            android:id="@+id/arrivalTime"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:textColor="@color/colorGood"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/rightGuidline"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textViewArrivalLabel"
-            app:layout_constraintTop_toTopOf="@+id/textViewDepartureTime"
+            app:layout_constraintStart_toStartOf="@+id/rightRowGuide"
+            app:layout_constraintTop_toBottomOf="@+id/textViewArrivalLabel"
             tools:text="@string/arrival_time"/>
 
         <ImageView
             android:id="@+id/header"
             android:layout_width="0dp"
             android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewArrivalTime"
+            app:layout_constraintEnd_toStartOf="@+id/rightGuidline"
+            app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@+id/arrivalTime"
             app:srcCompat="@color/colorPrimaryLight"
             tools:ignore="ContentDescription"/>
 
@@ -236,7 +240,6 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="@+id/terminal"
             app:layout_constraintEnd_toEndOf="@+id/header"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/header"
             app:layout_constraintTop_toBottomOf="@+id/header"
             app:srcCompat="@color/colorPrimary"
@@ -244,21 +247,20 @@
 
         <TextView
             android:id="@+id/terminalLabel"
-            android:layout_width="wrap_content"
+            android:layout_width="76dp"
             android:layout_height="wrap_content"
             android:text="@string/terminal_label"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat"
             app:layout_constraintBottom_toTopOf="@+id/body"
             app:layout_constraintEnd_toEndOf="@+id/terminal"
-            app:layout_constraintEnd_toStartOf="@+id/gate"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="@+id/terminal"
             app:layout_constraintTop_toTopOf="@+id/header"/>
 
         <TextView
             android:id="@+id/gateLabel"
-            android:layout_width="wrap_content"
+            android:layout_width="77dp"
             android:layout_height="wrap_content"
             android:text="@string/gate_label"
             android:textAlignment="center"
@@ -270,14 +272,13 @@
 
         <TextView
             android:id="@+id/seatLabel"
-            android:layout_width="wrap_content"
+            android:layout_width="77dp"
             android:layout_height="wrap_content"
             android:text="@string/seat_label"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat"
             app:layout_constraintBottom_toBottomOf="@+id/gateLabel"
             app:layout_constraintEnd_toEndOf="@+id/seat"
-            app:layout_constraintStart_toEndOf="@+id/gateLabel"
             app:layout_constraintStart_toStartOf="@+id/seat"
             app:layout_constraintTop_toTopOf="@+id/gateLabel"/>
 
@@ -327,29 +328,46 @@
             android:id="@+id/barcode"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             android:contentDescription="@string/barcode"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/rightGuidline"
+            app:layout_constraintStart_toStartOf="@+id/leftGuideline"
             app:layout_constraintTop_toBottomOf="@+id/gate"
             tools:srcCompat="@mipmap/barcode"/>
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/plane"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/art_plane"
             android:contentDescription="@string/flight_direction"
             app:layout_constraintBottom_toTopOf="@+id/divider"
             app:layout_constraintEnd_toEndOf="@+id/divider"
-            app:layout_constraintStart_toStartOf="@+id/divider"
-            app:srcCompat="@drawable/art_plane"/>
+            app:layout_constraintStart_toStartOf="@+id/divider"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/leftGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/rightGuidline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/rightRowGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="140dp"/>
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
