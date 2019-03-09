@@ -39,9 +39,10 @@ public class MainActivity extends AppCompatActivity {
         // TODO (4) Set the Content View using DataBindingUtil to the activity_main layout
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         // TODO (5) Load a BoardingPassInfo object with fake data using FakeDataUtils
-        BoardingPassInfo boardingPassInfo = FakeDataUtils.generateFakeBoardingPassInfo();
+        BoardingPassInfo boardingPassInfo = FakeDataUtils.generateFakeBoardingPassInfo(this);
         // TODO (9) Call displayBoardingPassInfo and pass the fake BoardingInfo instance
-        displayBoardingPassInfo(boardingPassInfo);
+        mBinding.setInfo(boardingPassInfo);
+//        displayBoardingPassInfo(boardingPassInfo);
     }
 
     private void displayBoardingPassInfo(BoardingPassInfo info) {
@@ -62,10 +63,7 @@ public class MainActivity extends AppCompatActivity {
         mBinding.textViewArrivalTime.setText(formatter.format(info.arrivalTime));
 
         // TODO (8) Use TimeUnit methods to format the total minutes until boarding
-        long totalMinutesBeforeBoarding = info.getMinutesUntilBoarding();
-        long hours = totalMinutesBeforeBoarding / 60;
-        long minutes = totalMinutesBeforeBoarding % 60;
-        mBinding.textViewBoardingInCountdown.setText(String.format(getString(R.string.countDownFormat), hours, minutes));
+        mBinding.textViewBoardingInCountdown.setText(info.boardingInTime);
     }
 }
 
