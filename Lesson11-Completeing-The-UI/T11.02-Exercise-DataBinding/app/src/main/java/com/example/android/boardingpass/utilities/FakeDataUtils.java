@@ -43,7 +43,7 @@ public class FakeDataUtils {
         long now = System.currentTimeMillis();
 
         // Anything from 0 minutes up to (but not including) 30 minutes
-        long randomMinutesUntilBoarding = (long) (Math.random() * 30);
+        long randomMinutesUntilBoarding = (long) (Math.random() * 90);
         // Standard 40 minute boarding time
         long totalBoardingMinutes = 40;
         // Anything from 1 hours up to (but not including) 6 hours
