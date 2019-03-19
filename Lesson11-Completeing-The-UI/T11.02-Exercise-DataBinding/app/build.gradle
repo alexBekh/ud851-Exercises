@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.example.android.boardingpass"
         minSdkVersion 14
-        targetSdkVersion 25
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
@@ -20,6 +20,7 @@ android {
     }
 
     // TODO (1) Enable Data Binding in your application
+    dataBinding.enabled = true
 }
 
 dependencies {
