@@ -7,10 +7,19 @@
     colorAccent is #FF9100 -->
 
     <!-- Base application colors -->
-    <color name="colorPrimary">#673AB7</color>
-    <color name="colorPrimaryDark">#512DA8</color>
-    <color name="colorAccent">#FF9100</color>
-    <!-- Create a new color, colorPrimaryLight that is #D1C4E9 -->
-    <color name="colorPrimaryLight">#D1C4E9</color>
+    <!--<color name="colorPrimary">#673AB7</color>-->
+    <!--<color name="colorPrimaryDark">#512DA8</color>-->
+    <!--<color name="colorAccent">#FF9100</color>-->
+    <!--&lt;!&ndash; Create a new color, colorPrimaryLight that is #D1C4E9 &ndash;&gt;-->
+    <!--<color name="colorPrimaryLight">#D1C4E9</color>-->
+
+    <color name="primary">#FF9800</color>
+    <color name="primary_dark">#F57C00</color>
+    <color name="primary_light">#FFE0B2</color>
+    <color name="accent">#FFC107</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="icons">#212121</color>
+    <color name="divider">#BDBDBD</color>
 
 </resources>
